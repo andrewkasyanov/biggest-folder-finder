@@ -6,11 +6,19 @@ public class Main {
 
     public static void main(String[] args) {
 
-        String folderpath = "F:\\ОБРАЗЫ";
-        long sizeLimit = 50 * 1024 * 1024;
 
-        File file = new File(folderpath);
+        ParametersBag bag = new ParametersBag(args);
+
+        String folderPath = bag.getPath();
+        long sizeLimit = bag.getLimit();
+
+        File file = new File(folderPath);
         Node root = new Node(file, sizeLimit);
+
+        String folderpath = "F:\\ОБРАЗЫ";
+//        long sizeLimit = 50 * 1024 * 1024;
+
+
 
 
         long start = System.currentTimeMillis();
