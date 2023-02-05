@@ -7,7 +7,8 @@ public class SizeCalculator {
     private static final long MEGA_BYTE = KYLO_BYTE * 1024;
     private static final long GYGA_BYTE = MEGA_BYTE * 1024;
     private static final long TERA_BYTE = GYGA_BYTE * 1024;
-    private static HashMap<Character, Integer> char2multiplier = getMultipliers();
+    private static HashMap<Character, Integer>
+            char2multiplier = getMultipliers();
 
 
     public static String getHumanReadableSize(long size) {
@@ -41,15 +42,13 @@ public class SizeCalculator {
         for (int i = 0; i < sizeMultipliers.length; i++) {
             double value = ((double) size) / Math.pow(1024, i);
             if (value < 1024) {
-                return Math.round(value *100)/100. + "" + sizeMultipliers[i] + (i > 0 ? "b" : "");
+                return Math.round(value *100)/100. + " " + sizeMultipliers[i] + (i > 0 ? "b" : "");
             }
         }
         return "Very big";
     }
 
     public static long getSizeFromHumanReadable(String size) {
-
-
         char sizeFactor = size
                 .replaceAll("[0-9\\s+]+", "")
                 .charAt(0);

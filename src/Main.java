@@ -14,10 +14,10 @@ public class Main {
 
         File file = new File(folderPath);
         Node root = new Node(file, sizeLimit);
-
-        String folderpath = "F:\\ОБРАЗЫ";
-//        long sizeLimit = 50 * 1024 * 1024;
-
+//
+//        String folderpath = "F:\\ОБРАЗЫ";
+////        long sizeLimit = 50 * 1024 * 1024;
+//
 
 
 
