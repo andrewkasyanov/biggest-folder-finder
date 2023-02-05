@@ -1,4 +1,3 @@
-import org.w3c.dom.Node;
 
 import java.io.File;
 import java.util.LinkedList;
@@ -16,22 +15,26 @@ public class FolderSizeCalculator extends RecursiveTask<Long> {
 
     @Override
     protected Long compute() {
-        File folder;
+        File folder = node.getFolder();
         if (folder.isFile()) {
-            return folder.length();
+            long lenght = folder.length();
+            node.setSize(lenght);
+            return lenght;
         }
         long sum = 0;
         List<FolderSizeCalculator> subTask = new LinkedList<>();
         File[] files = folder.listFiles();
         for (File file : files) {
-            FolderSizeCalculator task = new FolderSizeCalculator(file);
+            Node child = new Node(file, node.getLimit());
+            FolderSizeCalculator task = new FolderSizeCalculator(child);
             task.fork();
             subTask.add(task);
+            node.addChild(child);
         }
         for (FolderSizeCalculator task : subTask) {
             sum += task.join();
         }
-//        node.setSize(sum);
+        node.setSize(sum);
         return sum;
     }
 }
