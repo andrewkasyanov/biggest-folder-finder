@@ -7,14 +7,16 @@ import java.util.concurrent.RecursiveTask;
 
 public class FolderSizeCalculator extends RecursiveTask<Long> {
 
-    private File folder;
 
-    public FolderSizeCalculator(File folder) {
-        this.folder = folder;
+    private Node node;
+
+    public FolderSizeCalculator(Node node) {
+        this.node = node;
     }
 
     @Override
     protected Long compute() {
+        File folder;
         if (folder.isFile()) {
             return folder.length();
         }
@@ -29,6 +31,7 @@ public class FolderSizeCalculator extends RecursiveTask<Long> {
         for (FolderSizeCalculator task : subTask) {
             sum += task.join();
         }
+//        node.setSize(sum);
         return sum;
     }
 }
